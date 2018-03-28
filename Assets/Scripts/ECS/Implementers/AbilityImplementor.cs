@@ -1,15 +1,23 @@
-﻿using Svelto.ECS;
+﻿using Hexagon.Effects;
+using Svelto.ECS;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Hexagon.ECS.Ability 
 {
-    public class AbilityImplementor : MonoBehaviour, IImplementor, IAbilityComponent, IAbilityRangeComponent, IAbilityAreaComponent 
+    public class AbilityImplementor : MonoBehaviour, IImplementor, IAbilityComponent, IAbilityRangeComponent,
+        IAbilityAreaComponent, IAbilityEffectsComponent 
     {
         [SerializeField] string _spellName;
         [SerializeField] private Sprite _icon;
         [SerializeField] private int _maxRange;
         [SerializeField] private int _area;
+        [SerializeField] private List<BaseEffect> _effects;
+
+        void Awake()
+        {
+            apply = new DispatchOnSet<bool>(gameObject.GetInstanceID());
+        }
 
         public string spellName
         {
@@ -34,5 +42,15 @@ namespace Hexagon.ECS.Ability
             get { return _area - 1; }
             set { _area = value; }
         }
+
+        public List<BaseEffect> effects
+        {
+            get
+            {
+                return _effects;
+            }
+        }
+
+        public DispatchOnSet<bool> apply { get; private set; }
     }
 }

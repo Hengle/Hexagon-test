@@ -122,7 +122,7 @@ namespace Hexagon.ECS {
 
         void ICompositionRoot.OnContextDestroyed() {
             _enginesRoot.Dispose();
-            TaskRunner.Instance.StopAndCleanupAllDefaultSchedulerTasks();
+            TaskRunner.StopAndCleanupAllDefaultSchedulers();
         }
 
         void ICompositionRoot.OnContextInitialized() {            
