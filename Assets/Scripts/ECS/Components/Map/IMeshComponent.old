@@ -1,0 +1,34 @@
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+namespace Hexagon.ECS.Components.Map {
+
+
+    public interface IMeshComponent : IComponent {
+        void clear(MeshData data);
+        void setVertices(List<Vector3> vertices, MeshData data);
+    }
+
+    public interface ITerrainComponent : IComponent {
+        bool useCollider { get; }
+        bool useCellData { get; }
+        MeshData meshData { get; }
+    }
+
+    public interface IWaterComponent : IComponent {
+        bool useCollider { get; }
+        bool useCellData { get; }
+        MeshData meshData { get; }
+    }
+
+    public struct MeshData {
+       public List<Vector3> vertices;
+       public List<Vector3> cellIndices;
+       public List<Color> cellWeights;
+       public List<Vector2> uvs;
+       public List<Vector2> uvs2;
+       public List<int> triangles;
+       public Mesh mesh;
+       public MeshCollider meshCollider;
+    }
+}

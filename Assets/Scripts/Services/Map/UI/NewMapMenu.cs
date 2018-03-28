@@ -1,0 +1,55 @@
+﻿using UnityEngine;
+
+namespace Hexagon.Services.Map.UI
+{
+    public class NewMapMenu : MonoBehaviour
+    {
+        private bool generateMaps = true;
+
+        public HexGrid hexGrid;
+
+        public HexMapGenerator mapGenerator;
+
+        public void ToggleMapGeneration(bool toggle)
+        {
+            generateMaps = toggle;
+        }
+
+        public void Open()
+        {
+            gameObject.SetActive(true);
+            HexMapCamera.Locked = true;
+        }
+
+        public void Close()
+        {
+            gameObject.SetActive(false);
+            HexMapCamera.Locked = false;
+        }
+
+        public void CreateSmallMap()
+        {
+            CreateMap(20, 15);
+        }
+
+        public void CreateMediumMap()
+        {
+            CreateMap(40, 30);
+        }
+
+        public void CreateLargeMap()
+        {
+            CreateMap(80, 60);
+        }
+
+        private void CreateMap(int x, int z)
+        {
+            if (generateMaps)
+                mapGenerator.GenerateMap(x, z);
+            else
+                hexGrid.CreateMap(x, z);
+            HexMapCamera.ValidatePosition();
+            Close();
+        }
+    }
+}

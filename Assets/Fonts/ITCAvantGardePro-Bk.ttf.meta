@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 4db77a20895b02848848fb13fcb4ffc6
+timeCreated: 1517955940
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: ITC Avant Garde Gothic Pro
+  fontNames:
+  - ITC Avant Garde Gothic Pro
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 5c9dd6b6c627c7341b8a7953cadf79f0, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

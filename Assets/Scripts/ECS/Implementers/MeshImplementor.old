@@ -1,0 +1,54 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+using Hexagon.ECS.Components.Map;
+
+namespace Hexagon.ECS.Implementors.Map {
+
+    public class MeshImplementor : MonoBehaviour, IImplementor, IMeshComponent, ITerrainComponent, IWaterComponent {
+
+        Mesh _hexMesh;
+        MeshCollider _meshCollider;
+
+        [SerializeField]GameObject terrain, water;
+
+
+        //public bool useCollider { get { return Collider; } } 
+        //public bool useCellData { get { return CellData; } }
+
+        MeshData terrainData, waterData;
+
+        public Mesh mesh {
+            get {
+                return _hexMesh;
+            }
+        }
+
+        public MeshData meshData { get; set; }
+
+        public MeshCollider meshCollider {
+            get {
+                return _meshCollider;
+            }
+        }
+
+        void Awake() {
+            GetComponent<MeshFilter>().mesh = _hexMesh = new Mesh();
+            _hexMesh.name = "Hex Mesh";
+
+            if (Collider) {
+                _meshCollider = gameObject.AddComponent<MeshCollider>();
+            }
+        }
+
+        public void clear(MeshData data) {
+            data.mesh.Clear();
+        }
+
+        public void setVertices(List<Vector3> vertices, MeshData data) {
+            data.mesh.SetVertices(vertices);
+        }
+    }
+}
+
