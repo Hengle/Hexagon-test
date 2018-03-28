@@ -40,10 +40,23 @@ namespace Hexagon.Services.Map
             instance = this;
         }
 
+        private void OnGUI() {
+            if (Event.current.type == EventType.ScrollWheel) 
+            {
+                var zoomDelta = Event.current.delta.y;
+                if (zoomDelta < -10f || zoomDelta > 10f) {
+                    Debug.Log(Event.current.delta);
+                    AdjustZoom(zoomDelta / 50);
+                }
+            }
+           
+        }
+
         private void Update()
         {
-            var zoomDelta = Input.GetAxis("Mouse ScrollWheel");
-            if (zoomDelta != 0f) AdjustZoom(zoomDelta);
+
+
+            
 
             var rotationDelta = Input.GetAxis("Rotation");
             if (rotationDelta != 0f) AdjustRotation(rotationDelta);
