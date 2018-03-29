@@ -7,5 +7,6 @@ namespace Hexagon.ECS.Ability
         public IAbilityComponent abilityComponent;
         public IAbilityRangeComponent rangeComponent;
         public IAbilityAreaComponent areaComponent;
+        public IAbilityEffectsComponent effectsComponent;
     }
 }

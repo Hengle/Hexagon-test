@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Hexagon.Services.Map
 {
@@ -44,9 +45,9 @@ namespace Hexagon.Services.Map
             if (Event.current.type == EventType.ScrollWheel) 
             {
                 var zoomDelta = Event.current.delta.y;
-                if (zoomDelta < -10f || zoomDelta > 10f) {
-                    Debug.Log(Event.current.delta);
-                    AdjustZoom(zoomDelta / 50);
+                if (Math.Abs(zoomDelta) > 0f) {
+                   
+                    AdjustZoom(Mathf.Clamp(zoomDelta, -0.1f, 0.1f));
                 }
             }
            
@@ -54,9 +55,6 @@ namespace Hexagon.Services.Map
 
         private void Update()
         {
-
-
-            
 
             var rotationDelta = Input.GetAxis("Rotation");
             if (rotationDelta != 0f) AdjustRotation(rotationDelta);
