@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Hexagon.Services.Map;
 using Svelto.ECS;
 using Debug = UnityEngine.Debug;
 
 namespace Hexagon.ECS.Unit
 {
-    public class UnitCoordinatesImplementor : IImplementor, ICoordinatesComponent, IUnitStatsComponent
+    public class UnitCoordinatesImplementor : IImplementor, ICoordinatesComponent, IUnitAbilityComponent
     {
         public UnitCoordinatesImplementor(int x, int z)
         {
             coordinates = new HexCoordinates(x, z);
-            direction = HexDirection.NE;
-            stats = new Dictionary<StatTypes, Stat>();
-            foreach (StatTypes stat in Enum.GetValues(typeof(StatTypes)))
-            {
-                stats.Add(stat, new Stat());
-            }
+            direction = HexDirection.NE;            
         }
 
         public HexCoordinates coordinates { get; set; }
@@ -24,6 +20,7 @@ namespace Hexagon.ECS.Unit
         public HexDirection direction { get; set; }
 
 
-        public Dictionary<StatTypes, Stat> stats { get; private set; }
+        public int currentAbility { get; set; }
+        public List<HexCell> targets { get; set; }
     }
 }

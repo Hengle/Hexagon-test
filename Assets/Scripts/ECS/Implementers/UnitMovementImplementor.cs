@@ -67,15 +67,17 @@ namespace Hexagon.ECS.Unit
             unitTransform = transform;
             anim = GetComponent<Animator>();
             isMyTurn = new DispatchOnSet<bool>(gameObject.GetInstanceID());
+            currentAbility = new DispatchOnSet<int>(gameObject.GetInstanceID());
             maxMove = 5;
             moveCounter = new DispatchOnChange<int>(gameObject.GetInstanceID());
+            state = new DispatchOnSet<UnitTurnState>(gameObject.GetInstanceID());
         }
 
         public int ctrCounter { get; set; }
         public DispatchOnChange<int> moveCounter { get; set; }
         public bool isInBattle { get; set; }
         public DispatchOnSet<bool> isMyTurn { get; private set; }
-        public UnitTurnState state { get; set; }
-        public int currentAbility { get; set; }
+        public DispatchOnSet<UnitTurnState> state { get; set; }
+        public DispatchOnSet<int> currentAbility { get; private set; }
     }
 }

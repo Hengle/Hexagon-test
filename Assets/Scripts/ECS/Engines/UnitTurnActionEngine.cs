@@ -26,8 +26,8 @@ namespace Hexagon.ECS.Unit
             var unit = entityViewsDB.QueryEntityView<UnitEntityView>(_currentTurn.entityID);
             unit.turnComponent.isMyTurn.value = true;
             unit.turnComponent.moveCounter.value = 0;
-            unit.turnComponent.state = UnitTurnState.Movement;
-            unit.turnComponent.currentAbility = -1;
+            unit.turnComponent.state.value = UnitTurnState.Movement;
+            unit.abilityComponent.currentAbility = -1;
             _turnSequence.Next(this, ref _currentTurn, TurnCondition.starting);
             unit.inputComponent.pass.NotifyOnValueSet(OnPassInput);
         }

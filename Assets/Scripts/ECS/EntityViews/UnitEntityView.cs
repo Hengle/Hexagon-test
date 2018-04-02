@@ -11,5 +11,6 @@ namespace Hexagon.ECS.Unit
         public IInputComponent inputComponent;
         public IUnitMovementComponent movementComponent;
         public IHealthComponent healthComponent;
+        public IUnitAbilityComponent abilityComponent;
     }
 }

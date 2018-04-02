@@ -20,7 +20,7 @@ namespace Hexagon.ECS.Unit
         }
 
         public DispatchOnSet<HexCoordinates> selection { get; set; }
-        public DispatchOnSet<HexCoordinates> target { get; set; }
+        public DispatchOnSet<HexCoordinates> cellClick { get; set; }
         public DispatchOnSet<bool> pass { get; set; }
         public DispatchOnSet<int> abilitySelected { get; private set; }
         public DispatchOnSet<bool> cancel { get; private set; }
@@ -30,7 +30,7 @@ namespace Hexagon.ECS.Unit
         {
             playerTransform = transform;
             selection = new DispatchOnChange<HexCoordinates>(gameObject.GetInstanceID());
-            target = new DispatchOnSet<HexCoordinates>(gameObject.GetInstanceID());
+            cellClick = new DispatchOnSet<HexCoordinates>(gameObject.GetInstanceID());
             pass = new DispatchOnSet<bool>(gameObject.GetInstanceID());
             abilitySelected = new DispatchOnSet<int>(gameObject.GetInstanceID());
             cancel = new DispatchOnSet<bool>(gameObject.GetInstanceID());

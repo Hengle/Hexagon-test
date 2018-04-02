@@ -7,7 +7,7 @@ namespace Hexagon.ECS.Ability
 {
     public interface IAbilityEffectsComponent : IComponent
     {
-        List<BaseEffect> effects { get; }
+        List<Effect> effects { get; }
         DispatchOnSet<bool> apply { get; }
     }
 }

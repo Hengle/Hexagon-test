@@ -8,13 +8,13 @@ namespace Hexagon.ECS.Unit
         DispatchOnChange<int> moveCounter { get; }
         bool isInBattle { get; set; }
         DispatchOnSet<bool> isMyTurn { get; }
-        UnitTurnState state { get; set; }
-        int currentAbility { get; set; }
+        DispatchOnSet<UnitTurnState> state { get; set; }
     }
 
     public enum UnitTurnState
     {
         Movement,
-        Ability,
+        AbilitySelected,
+        AbilityTargeted,
     }
 }

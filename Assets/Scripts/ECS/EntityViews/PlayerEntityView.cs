@@ -10,6 +10,5 @@ namespace Hexagon.ECS.Player
         public IUnitMovementComponent movementComponent;
         public ITransformComponent transformComponent;
         public ITurnComponent turnComponent;
-        public IUnitStatsComponent statsComponent;
     }
 }

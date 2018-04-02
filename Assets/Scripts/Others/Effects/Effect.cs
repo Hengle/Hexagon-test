@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace Hexagon.Effects 
 {
-    public class BaseEffect : MonoBehaviour 
+    public class Effect : MonoBehaviour
     {
+        [SerializeField] private TargetType targetType;
 
-        
     }
+
 }
 
 

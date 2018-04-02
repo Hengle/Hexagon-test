@@ -28,7 +28,7 @@ namespace Hexagon.ECS.Engines.Unit
 
         protected override void Add(PlayerEntityView entityView)
         {
-            entityView.inputComponent.target.NotifyOnValueSet(MoveToTarget);
+            entityView.inputComponent.cellClick.NotifyOnValueSet(MoveToTarget);
             Place(entityView);
         }
 
@@ -41,7 +41,7 @@ namespace Hexagon.ECS.Engines.Unit
             PlayerEntityView entityView;
             if (entityViewsDB.TryQueryEntityView(id, out entityView))
             {
-                if (entityView.turnComponent.state != UnitTurnState.Movement) return;
+                if (entityView.turnComponent.state.value != UnitTurnState.Movement) return;
                 int range = entityView.movementComponent.maxMove - entityView.turnComponent.moveCounter.value;
                 if (range <= 0) return;
                 if (entityView.movementComponent.isWalking) return;

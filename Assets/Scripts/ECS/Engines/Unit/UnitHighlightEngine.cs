@@ -8,7 +8,7 @@ using Svelto.Tasks;
 using UnityEngine;
 
 namespace Hexagon.ECS.Unit {
-    public class UnitHighlightEngine : SingleEntityViewEngine<UnitEntityView>, IQueryingEntityViewEngine, IStep<AbilitySelectInfo> {
+    public class UnitHighlightEngine : SingleEntityViewEngine<UnitEntityView>, IQueryingEntityViewEngine {
         private readonly HexGrid _mapManager;
 
 
@@ -22,27 +22,43 @@ namespace Hexagon.ECS.Unit {
         public IEntityViewsDB entityViewsDB { set; private get; }
 
         protected override void Add(UnitEntityView entityView) {
-            entityView.inputComponent.selection.NotifyOnValueSet(onCellSelection);
+            entityView.inputComponent.selection.NotifyOnValueSet(OnCellSelection);
+            entityView.turnComponent.state.NotifyOnValueSet(OnStateChange);
         }
 
         protected override void Remove(UnitEntityView entityView) {
-            entityView.inputComponent.selection.StopNotify(onCellSelection);
+            entityView.inputComponent.selection.StopNotify(OnCellSelection);
+            entityView.turnComponent.state.StopNotify(OnStateChange);
         }
 
-        private void onCellSelection(int id, HexCoordinates target) {
+        private void OnCellSelection(int id, HexCoordinates target) {
             UnitEntityView entityView;
             if (entityViewsDB.TryQueryEntityView(id, out entityView))
             {
-                switch (entityView.turnComponent.state)
+                switch (entityView.turnComponent.state.value)
                 {
                     case UnitTurnState.Movement:
                         MovementHighlight(entityView, target);
                         break;
 
-                    case UnitTurnState.Ability:
+                    case UnitTurnState.AbilitySelected:
                         AbilityHighlight(entityView, target);
                         break;
                 }
+            }
+        }
+
+
+        private void OnStateChange(int unitId, UnitTurnState state)
+        {
+            _mapManager.UnHighlightAllCells();
+            UnitEntityView entityView;
+            if (entityViewsDB.TryQueryEntityView(unitId, out entityView))
+            {
+                if (entityView.turnComponent.state.value == UnitTurnState.AbilitySelected)
+                {
+                    AbilityHighlight(entityView, entityView.inputComponent.selection.value);
+                }               
             }
         }
 
@@ -65,7 +81,7 @@ namespace Hexagon.ECS.Unit {
         {
             _mapManager.UnHighlightAllCells();
             AbilityEntityView abilityView;
-            if (entityViewsDB.TryQueryEntityView(entityView.turnComponent.currentAbility, out abilityView))
+            if (entityViewsDB.TryQueryEntityView(entityView.abilityComponent.currentAbility, out abilityView))
             {
                 int range = abilityView.rangeComponent.maxRange;
                 int area = abilityView.areaComponent.area;
@@ -79,22 +95,6 @@ namespace Hexagon.ECS.Unit {
                 {
                     List<HexCell> areaCells = _mapManager.SearchInRange(currentCell, area, true);
                     _mapManager.HighlightCells(areaCells, Color.red);
-                }
-
-            }
-        }
-
-
-        public void Step(ref AbilitySelectInfo token, int condition)
-        {
-            _mapManager.UnHighlightAllCells();
-            if (!token.isCancel)
-            {
-                UnitEntityView entityView;
-
-                if (entityViewsDB.TryQueryEntityView(token.unitID, out entityView))
-                {
-                    AbilityHighlight(entityView, entityView.inputComponent.selection.value);
                 }
 
             }

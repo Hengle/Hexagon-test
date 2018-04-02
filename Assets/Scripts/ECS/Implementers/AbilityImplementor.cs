@@ -12,7 +12,7 @@ namespace Hexagon.ECS.Ability
         [SerializeField] private Sprite _icon;
         [SerializeField] private int _maxRange;
         [SerializeField] private int _area;
-        [SerializeField] private List<BaseEffect> _effects;
+        [SerializeField] private List<Effect> _effects;
 
         void Awake()
         {
@@ -43,7 +43,7 @@ namespace Hexagon.ECS.Ability
             set { _area = value; }
         }
 
-        public List<BaseEffect> effects
+        public List<Effect> effects
         {
             get
             {

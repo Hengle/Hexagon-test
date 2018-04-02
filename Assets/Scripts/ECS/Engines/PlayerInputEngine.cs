@@ -49,7 +49,7 @@ namespace Hexagon.ECS.Player
                                 _playerEntityView.inputComponent.selection.value = coord;
                             }
                             if (Input.GetButtonUp("Fire1")) {
-                                _playerEntityView.inputComponent.target.value = coord;
+                                _playerEntityView.inputComponent.cellClick.value = coord;
                             }
                         }
                     }

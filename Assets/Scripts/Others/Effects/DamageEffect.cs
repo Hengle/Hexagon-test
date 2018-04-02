@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Hexagon.Effects
 {
-    public class DamageEffect : BaseEffect
+    public class DamageEffect : Effect
     {
         [SerializeField] private int _value;
 

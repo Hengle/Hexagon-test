@@ -15,6 +15,7 @@ namespace Hexagon.ECS.Ability {
 
         }
 
+
         public IEntityViewsDB entityViewsDB { private get; set; }
 
         public void Ready()

@@ -51,7 +51,7 @@ namespace Hexagon.ECS {
             BattleHudEngine battleHudEngine = new BattleHudEngine(_uiService);
             HealthEngine healthEngine = new HealthEngine();
 
-            AbilitySelectionEngine abilitySelectionEngine = new AbilitySelectionEngine(_uiService, abilityUsedSequence);
+            AbilitySelectionEngine abilitySelectionEngine = new AbilitySelectionEngine(_uiService, abilityUsedSequence, _mapManager);
             AbilityTargetEngine abilityTargetEngine = new AbilityTargetEngine();
 
 
@@ -84,9 +84,9 @@ namespace Hexagon.ECS {
                         abilitySelectionEngine,
                         new To
                         {
-                            { new IStep[]  { abilityTargetEngine, unitHighlightEngine } }
+                            { new IStep[]  { abilityTargetEngine } },
                         }
-                    },
+                    }
                 }
             );
 
